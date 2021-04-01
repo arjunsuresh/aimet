@@ -62,6 +62,7 @@ add_library(MoDlEqualization STATIC
 
 target_include_directories(MoDlEqualization
       PUBLIC
+${OpenCV_INCLUDE_DIRS}
       ${CMAKE_CURRENT_SOURCE_DIR}/include
       ${PYBIND11_INC_DIRS})
 

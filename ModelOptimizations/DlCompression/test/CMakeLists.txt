@@ -54,7 +54,8 @@ target_link_libraries(MoDlCompressionTest
       Threads::Threads
       MoDlCompression
       stdc++
-      ${LAPACKE_LIBRARY}
+"/usr/lib64/libopenblas64.so"
+         ${LAPACKE_LIBRARY}
       z
       dl
       gtest gtest_main

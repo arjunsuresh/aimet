@@ -44,6 +44,8 @@ add_library(MoDlCompression STATIC
 
 target_include_directories(MoDlCompression
       PUBLIC
+"/usr/include/lapacke/"
+${OpenCV_INCLUDE_DIRS}
          ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_compile_options(MoDlCompression

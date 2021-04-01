@@ -55,7 +55,8 @@ target_link_libraries(MoDlEqualizationTest
         MoDlEqualization
         stdc++
         PYBIND11
-        ${LAPACKE_LIBRARY}
+"/usr/lib64/libopenblas64.so"
+         ${LAPACKE_LIBRARY}
         ${OPENCV_LIBRARY}
         z
         dl

@@ -85,11 +85,12 @@ else(ENABLE_CUDA)
 
 endif(ENABLE_CUDA)
 
-set(LAPACKE_LIBRARY "/usr/lib/x86_64-linux-gnu/liblapacke.so.3.7.1")
+#set(LAPACKE_LIBRARY "/usr/lib/x86_64-linux-gnu/liblapacke.so.3.7.1")
+set(LAPACKE_LIBRARY "/usr/lib64/liblapacke.so")
 
 find_package(OpenCV REQUIRED)
-set(OPENCV_LIBRARY /usr/local/lib/libopencv_core.a)
-
+#set(OPENCV_LIBRARY /usr/local/lib/libopencv_core.a)
+set(OPENCV_LIBRARY ${OpenCV_LIBS})
 # ----------------------------------
 # Conditional build for PyTorch
 # ----------------------------------
@@ -103,8 +104,12 @@ endif(NOT (DEFINED ENABLE_TORCH))
 if (ENABLE_TORCH)
   # If we enable PyTorch builds then use the pybind11 headers that are part of the torch pip install
   # So we don't have a version mismatch - between PyTorch custom C++ op code and PyMO
-  list(APPEND PYBIND11_INC_DIRS "/usr/local/lib/python3.6/dist-packages/torch/include")
-  list(APPEND PYBIND11_INC_DIRS "/usr/include/python3.6/")
+#  list(APPEND PYBIND11_INC_DIRS "/usr/local/lib/python3.6/dist-packages/torch/include")
+#  list(APPEND PYBIND11_INC_DIRS "/usr/include/python3.6/")
+list(APPEND PYBIND11_INC_DIRS "/home/arjun/.local/lib/python3.6/site-packages/torch/include")
+  list(APPEND PYBIND11_INC_DIRS "/usr/include/python3.6m/")
+list(APPEND PYBIND11_INC_DIRS "${GTEST_INCLUDE_DIR}")
+list(APPEND PYBIND11_INC_DIRS "/usr/include/lapacke/")
 
 else (ENABLE_TORCH)
   list(APPEND PYBIND11_INC_DIRS "/usr/local/lib/python3.6/dist-packages/pybind11/include/")
@@ -121,7 +126,7 @@ endif (ENABLE_TORCH)
 add_library(PYBIND11 SHARED IMPORTED)
 
 set_target_properties(PYBIND11 PROPERTIES
-        IMPORTED_LOCATION "/usr/lib/x86_64-linux-gnu/libpython3.6m.so"
+        IMPORTED_LOCATION "/usr/lib64/libpython3.6m.so"
         INTERFACE_INCLUDE_DIRECTORIES "${PYBIND11_INC_DIRS}"
         )
 
